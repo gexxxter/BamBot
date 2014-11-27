@@ -33,7 +33,7 @@ public class ChatBotExample {
 	private ArrayList<LogEntry> log = new ArrayList<>();
 
 	public static void main(String[] args) {
-		new SlaveBot();
+		new BamBot(args[0],args[1]);
 	}
 
 }
