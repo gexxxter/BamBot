@@ -39,13 +39,11 @@ import com.github.theholywaffle.teamspeak3.api.wrapper.Wrapper;
 public class BamBot implements TS3Listener {
 
 	private TS3Api api;
-	private String myNickname;
-	private ArrayList<LogEntry> log = new ArrayList<>();
-	private Map<String, ArrayList<String>> voteList = new HashMap<>();
-	private ArrayList<AccesLogEntry> accesLog = new ArrayList<>();
+	public String myNickname;
+
 
 	private int myChannelId = 1;
-	public static int TEAM_SIZE = 3;
+	public final static int TEAM_SIZE = 3;
 
 	public BamBot(String user, String pass) {
 		final TS3Config config = new TS3Config();
@@ -69,68 +67,7 @@ public class BamBot implements TS3Listener {
 
 	@Override
 	public void onTextMessage(TextMessageEvent e) {
-		if (e.getTargetMode() == TextMessageTargetMode.CHANNEL
-				&& !e.getInvokerName().equals(myNickname)) {
-			String message = e.getMessage().toLowerCase();
-			String[] commands = message.split(" ");
-			switch (commands[0]) {
-			case "ping":
-				api.sendChannelMessage("pong");
-				break;
-			case "cya":
-				api.sendChannelMessage("Hauste rein  " + e.getInvokerName());
-				api.kickClientFromServer(e.getInvokerId());
-				break;
-			case "findmsg":
-				displayLog(commands[1]);
-				break;
-			case "help":
-				displayHelp();
-				break;
-			case "hello":
-				api.sendChannelMessage("Hello " + e.getInvokerName());
-				break;
-			case "suicide":
-				api.sendChannelMessage("Ok... killing myself now...");
-				System.exit(0);
-				break;
-			case "private":
-				if (commands.length > 1) {
-					privateMode(e.getInvokerName(), commands[1]);
-				} else {
-					api.sendChannelMessage("Parameter missind!");
-				}
-				break;
-			default:
-				logMessage(e, message);
-				break;
-			}
-		}
-
-		if (e.getTargetMode() == TextMessageTargetMode.CLIENT
-				&& !e.getInvokerName().equals(myNickname)) {
-			String message = e.getMessage().toLowerCase();
-			String[] commands = message.split(" ");
-			switch (commands[0]) {
-			case "vote":
-				if (commands.length > 1) {
-					vote(commands[1], e.getInvokerName());
-				} else {
-					api.sendPrivateMessage(e.getInvokerId(),
-							"Parameter missing");
-				}
-				break;
-			case "showvotes":
-				showVotes(e.getInvokerId());
-				break;
-			case "help":
-				showCmdHelp(e.getInvokerId());
-				break;
-			case "showacceslog":
-				showAccesLog(e.getInvokerId());
-				break;
-			}
-		}
+		
 	}
 
 	private void showCmdHelp(int clientId) {
@@ -144,19 +81,10 @@ public class BamBot implements TS3Listener {
 		api.sendPrivateMessage(clientId, builder.toString());
 	}
 
-	private void showVotes(int clientId) {
-		for (String key : voteList.keySet()) {
-			StringBuilder builder = new StringBuilder();
-			builder.append(key).append("=>");
-			for (String clientName : voteList.get(key)) {
-				builder.append(clientName).append(", ");
-			}
-			api.sendPrivateMessage(clientId, builder.toString());
 
-		}
-	}
 
 	private void showAccesLog(int clientId) {
+		ArrayList<AccesLogEntry> accesLog = RessourceManager.getAccesLog();
 		for (AccesLogEntry entry : accesLog) {
 			StringBuilder builder = new StringBuilder();
 			builder.append(entry.getUserName()).append(" ");
@@ -170,6 +98,7 @@ public class BamBot implements TS3Listener {
 
 	private void vote(String game, String clientName) {
 		ArrayList<String> clientNames = null;
+		Map<String, ArrayList<String>> voteList = RessourceManager.getVoteList();
 		if (null == voteList.get(game)) {
 			clientNames = new ArrayList<>();
 			voteList.put(game, clientNames);
@@ -249,6 +178,7 @@ public class BamBot implements TS3Listener {
 
 	private void logClientJoin(ClientJoinEvent e) {
 		String value = "";
+		ArrayList<AccesLogEntry> accesLog = RessourceManager.getAccesLog();
 		AccesLogEntry accesLogEntry = new AccesLogEntry();
 		value = "connected";
 		accesLogEntry.setUserName(e.getClientNickname());
@@ -265,6 +195,7 @@ public class BamBot implements TS3Listener {
 	@Override
 	public void onClientLeave(ClientLeaveEvent e) {
 		String value = "";
+		ArrayList<AccesLogEntry> accesLog = RessourceManager.getAccesLog();
 		AccesLogEntry accesLogEntry = new AccesLogEntry();
 		value = "disconnected";
 		accesLogEntry.setUserName(getUserNameById(e.getClientId()));
@@ -324,6 +255,7 @@ public class BamBot implements TS3Listener {
 
 	private void logMessage(TextMessageEvent e, String message) {
 		LogEntry logEntry = new LogEntry();
+		ArrayList<LogEntry> log = RessourceManager.getLog();
 		logEntry.setMessage(message);
 		logEntry.setUserId(e.getInvokerUserId());
 		logEntry.setUserName(e.getInvokerName());
@@ -331,6 +263,7 @@ public class BamBot implements TS3Listener {
 	}
 
 	private void displayLog(String searchWord) {
+		ArrayList<LogEntry> log = RessourceManager.getLog();
 		for (LogEntry entry : log) {
 			if (entry.getMessage().contains(searchWord)) {
 				String date = createDateString(entry.getTimestamp());
