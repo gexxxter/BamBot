@@ -52,7 +52,7 @@ public class BamBot implements TS3Listener {
 		config.setHost("127.0.0.1");
 		config.setDebugLevel(Level.OFF);
 		config.setFloodRate(FloodRate.UNLIMITED);
-		config.setLoginCredentials("bot", "RMXpo5U7");
+		config.setLoginCredentials(user, pass);
 
 		final TS3Query query = new TS3Query(config);
 		query.connect();
