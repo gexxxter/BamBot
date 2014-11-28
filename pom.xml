@@ -8,7 +8,7 @@
 
 	<repositories>
 		<repository>
-			<id>TeamSpeak-3-Java-API-mvn-repo</id>
+			<id>github</id>
 			<url>https://raw.githubusercontent.com/TheHolyWaffle/TeamSpeak-3-Java-API/mvn-repo/</url>
 			<snapshots>
 				<enabled>true</enabled>

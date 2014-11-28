@@ -26,10 +26,7 @@ package tsBot;
  * #L%
  */
 
-import java.util.ArrayList;
-
 import tsBot.BamBot;
-import tsBot.LogEntry;
 
 public class ChatBotExample {
 
