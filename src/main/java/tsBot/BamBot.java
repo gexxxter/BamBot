@@ -24,7 +24,7 @@ import com.github.theholywaffle.teamspeak3.api.wrapper.ClientInfo;
 public class BamBot implements TS3Listener {
 
 	private TS3Api api;
-	public String myNickname;
+	public String myNickname="BamBot";
 
 	private int myChannelId = 1;
 
@@ -45,6 +45,7 @@ public class BamBot implements TS3Listener {
 		api.registerAllEvents();
 		api.moveClient(1);
 		api.addTS3Listeners(this);
+		RessourceManager.setApi(api);
 	}
 
 	@Override

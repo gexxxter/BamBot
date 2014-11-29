@@ -1,4 +1,11 @@
-tsBot\ChatBotExample.class
-tsBot\SlaveBot.class
-tsBot\LogEntry.class
+tsBot\UserOperationService.class
+tsBot\BamBot.class
+tsBot\ChannelMessageReciever.class
 tsBot\AccesLogEntry.class
+tsBot\ChatBotExample.class
+tsBot\Utils.class
+tsBot\PrivateMessageReciever.class
+tsBot\MessageService.class
+tsBot\BamBot$1.class
+tsBot\RessourceManager.class
+tsBot\LogEntry.class
