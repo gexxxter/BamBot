@@ -8,7 +8,7 @@
 
 	<repositories>
 		<repository>
-			<id>TeamSpeak-3-Java-API-mvn-repo</id>
+			<id>github</id>
 			<url>https://raw.githubusercontent.com/TheHolyWaffle/TeamSpeak-3-Java-API/mvn-repo/</url>
 			<snapshots>
 				<enabled>true</enabled>
@@ -23,6 +23,12 @@
 			<artifactId>teamspeak3-api</artifactId>
 			<version>[1.0.0,2.0.0)</version>
 		</dependency>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>7.0</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>

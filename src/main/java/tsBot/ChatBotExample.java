@@ -26,14 +26,16 @@ package tsBot;
  * #L%
  */
 
-import java.util.ArrayList;
+import tsBot.BamBot;
 
 public class ChatBotExample {
 
-	private ArrayList<LogEntry> log = new ArrayList<>();
-
 	public static void main(String[] args) {
-		new BamBot(args[0],args[1]);
+		if (args.length < 2) {
+			System.out.println("Parameters missing");
+			return;
+		}
+		new BamBot(args[0], args[1]);
 	}
 
 }
