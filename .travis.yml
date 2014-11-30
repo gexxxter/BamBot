@@ -16,4 +16,4 @@ addons:
     notification_email: basti_12@gmx.de
     build_command_prepend: "mvn clean"
     build_command:   "mvn compile assembly:single"
-    branch_pattern: coverity_scan
+    branch_pattern: master
