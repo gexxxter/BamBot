@@ -1,3 +1,19 @@
 language: java
 jdk:
   - oraclejdk8
+  
+  env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "kaBQnGbmBMlLJPlXAWxvHgvVgD4GJVM+1m5U8c15oNbwZDsC2yfGwnkGf3J2cLXvzy4eFym5hnzoj5+SH39MPFFh/jpz6cGCCb1yZN+WnW2kEq0+LJmuRgHhaVwtuYGFi119o2mQqEw9ldNnF4x3SVq6fI9d4r9f2WnCNcfWsqI="
+
+addons:
+  coverity_scan:
+    project:
+      name: "gexxxter/BamBot"
+      description: "Build submitted via Travis CI"
+    notification_email: basti_12@gmx.de
+    build_command_prepend: "mvn clean"
+    build_command:   "mvn -DskipTests=true compile"
+    branch_pattern: coverity_scan
