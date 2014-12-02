@@ -15,7 +15,7 @@ public class PrivateMessageReciever {
 			if (commands.length > 1) {
 				RessourceManager.vote(commands[1], e.getInvokerName());
 			} else {
-				MessageService.sendPrivatMessage(message, e.getInvokerId());
+				MessageService.sendPrivatMessage("Parameter missing", e.getInvokerId());
 			}
 			break;
 		case "showvotes":
