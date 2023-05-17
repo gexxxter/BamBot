@@ -50,8 +50,8 @@
           },
           {
             "position": {
-              "x": 1080,
-              "y": 280
+              "x": 990,
+              "y": 250
             },
             "size": {
               "width": 112.5,
@@ -66,8 +66,8 @@
             },
             "visible": true,
             "shape": "actor",
-            "id": "2182bd1c-5139-4f0f-8061-37e9c9aed067",
             "zIndex": 2,
+            "id": "2182bd1c-5139-4f0f-8061-37e9c9aed067",
             "data": {
               "type": "tm.Actor",
               "name": "Actor",
